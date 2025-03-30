@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    "office-addins",
+    "react-hooks",
+    "react-refresh"
+  ],
+  "extends": [
+    "plugin:office-addins/react"
+  ]
+}
