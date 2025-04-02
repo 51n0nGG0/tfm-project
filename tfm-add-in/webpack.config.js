@@ -3,8 +3,14 @@
 const devCerts = require("office-addin-dev-certs");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
 const Dotenv = require('dotenv-webpack');
 const webpack = require("webpack");
+const path = require('path');
+
+const {
+  default: FluentUIReactIconsFontSubsettingPlugin,
+} = require('@fluentui/react-icons-font-subsetting-webpack-plugin');
 
 const urlDev = "https://localhost:3000/";
 const urlProd = "https://www.contoso.com/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
@@ -19,19 +25,27 @@ module.exports = async (env, options) => {
   const config = {
     devtool: "source-map",
     entry: {
-      polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
-      vendor: ["react", "react-dom", "core-js", "@fluentui/react-components", "@fluentui/react-icons"],
-      index: ["./src/index/index.tsx", "./src/index/index.html"],
-      authorize: ["./src/authorize/index.tsx", "./src/authorize/authorize.html"],
+      icons: ["@fluentui/react-icons"],
+      index: {
+        import: ["./src/index/index.tsx", "./src/index/index.html"],
+        dependOn: 'icons',
+      },
+      authorize: {
+        import: ["./src/authorize/index.tsx", "./src/authorize/authorize.html"],
+        dependOn: 'icons',
+      },
     },
     output: {
       clean: true,
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"],
+      conditionNames: ['fluentIconFont', 'import'],
     },
     optimization: {
-      usedExports:true
+      usedExports: true,
+      sideEffects: false,
+      minimize: true
     },
     module: {
       rules: [
@@ -59,6 +73,14 @@ module.exports = async (env, options) => {
             filename: "assets/[name][ext][query]",
           },
         },
+        {
+          test: /\.css$/,
+          use: ["style-loader", "css-loader"],
+        },
+        {
+          test: /\.(ttf|woff2?)$/,
+          type: 'asset',
+        },
       ],
     },
     plugins: [
@@ -66,12 +88,12 @@ module.exports = async (env, options) => {
       new HtmlWebpackPlugin({
         filename: "index.html",
         template: "./src/index/index.html",
-        chunks: ["polyfill", "vendor", "index"],
+        chunks: ["icons","index"],
       }),
       new HtmlWebpackPlugin({
         filename: "authorize.html",
         template: "./src/authorize/authorize.html",
-        chunks: ["polyfill", "vendor", "authorize"],
+        chunks: ["icons","authorize"],
       }),
       new CopyWebpackPlugin({
         patterns: [
@@ -94,6 +116,11 @@ module.exports = async (env, options) => {
       }),
       new webpack.ProvidePlugin({
         Promise: ["es6-promise", "Promise"],
+      }),
+      new FluentUIReactIconsFontSubsettingPlugin(),
+      new CompressionPlugin({
+        algorithm: "gzip",
+        test: /\.(js|html)$/
       }),
     ],
     devServer: {
