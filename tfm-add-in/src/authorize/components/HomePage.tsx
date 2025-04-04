@@ -1,5 +1,10 @@
 import * as React from "react";
-import { Button, Image, tokens, makeStyles, CheckboxProps, Label, Checkbox } from "@fluentui/react-components";
+import { Label} from "@fluentui/react-label";
+import { Button } from "@fluentui/react-button";
+import { Image} from "@fluentui/react-image";
+import { tokens } from "@fluentui/tokens";
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
+import { CheckboxProps, Checkbox} from "@fluentui/react-checkbox";
 import { LockClosed16Filled } from "@fluentui/react-icons";
 import { loginWithMicrosoft } from "../../services/authService";
 import { getToken, login } from "../../services/authMSALService";
@@ -58,19 +63,21 @@ const HomePage: React.FC<HomePageProps> = (props: HomePageProps) => {
 
   const handleLogin = async () => {
     try {
-      // 1. Llamamos a loginPopup() y realizamos el login
-      const loginResponse = await login();  // Asumiendo que esta función hace el login con MSAL
+      
+      const loginResponse = await login();
 
-      // 2. Llamamos a getToken() para obtener el access token
-      const accessToken = await getToken(); // Utilizamos el método getToken del archivo auth.js
+      if (loginResponse.idToken) {
+        sessionStorage.setItem("idToken", loginResponse.idToken);
+        console.log(loginResponse.idToken);
+      }
+
+      const accessToken = await getToken();
 
       if (accessToken) {
-        // Almacenar el token en sessionStorage
         sessionStorage.setItem("accessToken", accessToken);
         console.log("Token de acceso almacenado:", accessToken);
 
-        // 3. Redirigir a la página deseada
-        window.location.href = "/auth.html"; // Redirige a la página después de obtener el token
+        window.location.href = "/analyzer.html";
       } else {
         console.log("No se pudo obtener el token de acceso");
       }

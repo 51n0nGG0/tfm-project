@@ -1,10 +1,7 @@
 import * as React from "react";
 import { makeStyles } from "@griffel/react/makeStyles.cjs";
-import HomePage from "./HomePage";
-
-interface AppProps {
-  title: string;
-}
+import Header from "../components/header.component";
+import LandingPage from "./components/main.component";
 
 const useStyles = makeStyles({
   root: {
@@ -12,12 +9,13 @@ const useStyles = makeStyles({
   },
 });
 
-const App: React.FC<AppProps> = (props: AppProps) => {
+const App: React.FC = () => {
   const styles = useStyles();
 
   return (
     <div className={styles.root}>
-      <HomePage title={props.title} logo={"assets/logo-filled.png"}></HomePage>
+      <Header/>
+      <LandingPage/>
     </div>
   );
 };

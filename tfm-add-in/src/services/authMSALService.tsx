@@ -29,7 +29,7 @@ export async function login() {
 
     try {
         const loginResponse = await msalInstance.loginPopup({
-            scopes: [],
+            scopes: ["User.Read", "Mail.ReadBasic", "Mail.Read"],
         });
         console.log("User:", loginResponse.account);
         return loginResponse;
