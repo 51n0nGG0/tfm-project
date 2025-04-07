@@ -3,41 +3,57 @@ import { Image } from "@fluentui/react-image";
 
 import { makeStyles } from "@griffel/react/makeStyles.cjs";
 import { tokens } from "@fluentui/tokens";
+import { Button, Card, CardHeader, Title3, Title1, Body2, CardPreview } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
     mainComponent: {
         display: "flex",
         flexDirection: "column",
-    },
-    firstContainer: {
-        backgroundColor: "#183B59",
-        height: "45vh",
-        position: "relative",
+        alignContent: "center",
+        alignItems: "center",
         textAlign: "center",
+        gap: tokens.spacingVerticalXL,        
     },
-    secondContainer: {
-        backgroundColor: "#F2F0EB",
-        height: "200px",
+    headerComponent: {
+        display: "flex",
+        flexDirection: "column",
+        alignContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        gap: tokens.spacingVerticalXL,
+        background: "linear-gradient(90deg, #92ACDC, #FFFFFF)",
+        paddingBlock: tokens.spacingVerticalXXL,
+        paddingInline: tokens.spacingHorizontalXL,
+        width: "100%",
+        boxSizing: "border-box"
     },
-    laptopImage: {
-        position: "absolute",
-        bottom: "-11vh",
-        width: "auto",
-        height: "30vh"
+    buttonsContainer: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "20px",
     },
-    primaryMessage: {
-        fontSize: tokens.fontSizeHero800,
-        fontWeight: tokens.fontWeightSemibold,
-        lineHeight: tokens.lineHeightHero800,
-        paddingInline: "30px",
-        color: "#F2F0EB",
+    card: {
+        gap: tokens.spacingVerticalXL,
+        marginInline: tokens.spacingHorizontalXL,
     },
-    secondaryMessage: {
-        fontSize: tokens.fontSizeBase400,
-        fontWeight: tokens.fontWeightRegular,
-        lineHeight: tokens.lineHeightBase400,
-        paddingInline: "30px",
-        color: "#F2F0EB",
+    cardHeader: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center"
+    },
+    cardBody: {
+        display: "flex",
+        flexDirection: "row",
+        gap: tokens.spacingHorizontalL,
+        marginLeft: tokens.spacingHorizontalM,
+        marginRight: tokens.spacingHorizontalM,
+    },
+    cardBodyItem: {
+        width: "100%",
+        height: "100%",
+        display: "block",
     }
 })
 
@@ -49,16 +65,33 @@ const LandingPage: React.FC = () => {
     return (
         <>
             <main className={styles.mainComponent}>
-                <div className={styles.firstContainer}>
-                    <p className={styles.message + styles.primaryMessage}>Protege tu correo de amenazas en segundos</p>
-                    <p className={styles.message + styles.secondaryMessage}>Escanea y detecta correos maliciosos antes de que sea demasiado tarde con ayuda de la IA</p>
-                    <Image className={styles.laptopImage} width="300" height="300" src="assets/ordenador.png" alt="Laptop with an email and a warning icon"/>
-                </div>
-                <div className={styles.secondContainer}>
-                    <div>
-
+                <div className={styles.headerComponent}>
+                    <Title1 align="center">Protege tu correo de amenazas en segundos</Title1>
+                    <Body2  align="center">Escanea y detecta correos maliciosos antes de que sea demasiado tarde con ayuda de la IA</Body2>
+                    <div className={styles.buttonsContainer}>
+                        <Button appearance="primary" size="large" className={styles.primaryButton}>Analizar un correo ahora</Button>
                     </div>
                 </div>
+                <Card size="medium" className={styles.card}>
+                    <CardHeader className={styles.cardHeader}
+                        header={
+                            <Title3 align="center">Cómo funciona el analizador</Title3>
+                        }/>
+                    <div className={styles.cardBody}>
+                        <div className={styles.cardBodyItem}>
+                            <Image width="70" height="70" src="assets/icon-microsoft-500.png"/>
+                            <p>1. Se solicita autorización para leer correos personales</p>
+                        </div>
+                        <div className={styles.cardBodyItem}>
+                            <Image width="70" height="70" src="assets/icon-ai-500.png"/>
+                            <p>2. Se analiza el correo con la ayuda de un LLM</p>
+                        </div>
+                        <div className={styles.cardBodyItem}>
+                            <Image width="70" height="70" src="assets/icon-file-500.png"/>
+                            <p>3. Se recibe un reporte detallado del correo</p>
+                        </div>
+                    </div>
+                </Card>
             </main>
         </>
     );

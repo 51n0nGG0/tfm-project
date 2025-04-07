@@ -11,9 +11,10 @@ const useStyles = makeStyles({
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
-        backgroundColor: tokens.colorNeutralBackground4,
-        padding: "10px",
-        borderRadius: ".5rem",
+        alignItems: "center",
+        backgroundColor: tokens.colorNeutralBackground1,
+        padding: tokens.spacingHorizontalMNudge,
+        boxSizing: "border-box"
     },
     link: {
         textDecoration: "none",
@@ -47,7 +48,7 @@ const Header: React.FC = () => {
             <header className={styles.headerContainer}>
                 <a className={"homeicon" + styles.link} href="/authorize.html">
                     <div className={styles.linkContainer}>
-                        <Image width="40" height="40" src={"assets/logo-filled.png"} alt={"Home page logo"} />
+                        <Image width="40" height="40" src={"assets/logo-app-2.png"} alt={"Home page logo"} />
                         <h1 className={styles.h1Text}>TFM Add-in</h1>
                     </div>
                 </a>
