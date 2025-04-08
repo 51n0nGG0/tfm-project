@@ -1,7 +1,7 @@
 import * as React from "react";
 import { makeStyles } from "@griffel/react/makeStyles.cjs";
 import Header from "../components/header.component";
-import LandingPage from "./components/main.component";
+import LandingPage from "./components/landing-page.component";
 
 const useStyles = makeStyles({
   root: {

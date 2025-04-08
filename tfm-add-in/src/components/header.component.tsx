@@ -1,10 +1,13 @@
 import React from "react"
-import { Image } from "@fluentui/react-image";
-import AccountAvatar from "./avatar.component";
-import "./header.component.css";
 
 import { makeStyles } from "@griffel/react/makeStyles.cjs";
 import { tokens } from "@fluentui/tokens";
+
+import "./header.component.css";
+
+import { Image } from "@fluentui/react-image";
+
+import AccountAvatar from "./avatar.component";
 
 const useStyles = makeStyles({
     headerContainer: {
@@ -48,7 +51,7 @@ const Header: React.FC = () => {
             <header className={styles.headerContainer}>
                 <a className={"homeicon" + styles.link} href="/authorize.html">
                     <div className={styles.linkContainer}>
-                        <Image width="40" height="40" src={"assets/logo-app-2.png"} alt={"Home page logo"} />
+                        <Image width="40" height="40" src={"assets/icon-64.png"} alt={"Home page logo"} />
                         <h1 className={styles.h1Text}>TFM Add-in</h1>
                     </div>
                 </a>

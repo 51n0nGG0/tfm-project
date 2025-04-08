@@ -28,11 +28,11 @@ module.exports = async (env, options) => {
       icons: ["@fluentui/react-icons"],
       index: {
         import: ["./src/index/index.tsx", "./src/index/index.html"],
-        dependOn: 'icons',
+        dependOn: ['icons'],
       },
       authorize: {
         import: ["./src/authorize/index.tsx", "./src/authorize/authorize.html"],
-        dependOn: 'icons',
+        dependOn: ['icons'],
       },
     },
     output: {
@@ -98,8 +98,9 @@ module.exports = async (env, options) => {
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: "assets/*",
-            to: "assets/[name][ext][query]",
+            from: "**/*",
+            to: "assets/[path][name][ext][query]",
+            context: "assets"
           },
           {
             from: "manifest*.xml",
