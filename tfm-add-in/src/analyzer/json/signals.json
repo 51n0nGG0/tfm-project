@@ -1,0 +1,29 @@
+{
+    "signals": [
+        "LENGUAJE-DE-URGENCIA",
+        "ENLACE-SOSPECHOSO",
+        "ASUNTO-INCONSISTENTE",
+        "REMITENTE-SOSPECHOSO",
+        "FALTA-DE-PERSONALIZACIÓN",
+        "PAGO-URGENTE",
+        "IDENTIDAD-FALSA",
+        "TONO-INTIMIDANTE",
+        "CAMBIO-PAGO",
+        "LENGUAJE-FORMAL-RARO",
+        "TONO-EMOCIONAL",
+        "HISTORIA-DRAMÁTICA",
+        "PETICIÓN-INUSUAL",
+        "NARRATIVA-SOSPECHOSA",
+        "ADJUNTO-SIN-CONTEXTO",
+        "MENSAJE-VAGO",
+        "NOMBRE-ALARMA",
+        "PROMESA-EXAGERADA",
+        "PALABRAS-DISTORSIONADAS",
+        "FALTA-CONTEXTO",
+        "ENLACES-MÚLTIPLES",
+        "NOMBRE-MARCA",
+        "TONO-IMITADO",
+        "DOMINIO-SOSPECHOSO",
+        "FORMATO-IRREGULAR"
+    ]
+}
