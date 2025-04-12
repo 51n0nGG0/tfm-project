@@ -1,0 +1,80 @@
+{
+    "passedAudits": {
+        "number": 2,
+        "list": [
+            {
+                "name": "URGENCY LANGUAGE",
+                "shortDescription": "No excessive urgency detected.",
+                "longDescription": "Checks if the email uses language that pressures the recipient to act immediately, which is common in phishing or scam emails.",
+                "appliesTo": ["Phishing", "Scam"]
+            },
+            {
+                "name": "INTIMIDATING TONE",
+                "shortDescription": "No intimidating language used.",
+                "longDescription": "Detects language meant to scare or pressure the recipient, such as threats or severe consequences.",
+                "appliesTo": ["Scam", "Emotional Social Engineering"]
+            }
+        ]
+    },
+    "diagnostics": {
+        "number": 2,
+        "list": [
+            {
+                "name": "INCOSISTENT SUBJECT",
+                "shortDescription": "Subject tone doesn't match content.",
+                "longDescription": "Ensures the subject line sets appropriate expectations with the email content.",
+                "appliesTo": ["Business Email Compromise"],
+                "failureDetails": {
+                    "reason": "The subject line tone does not match the content body.",
+                    "evidence": [
+                        {
+                            "location": "subject",
+                            "text": "URGENT: FINAL WARNING"
+                        },
+                        {
+                            "location": "body",
+                            "text": "We kindly ask you to review the document at your earliest convenience."
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "SUSPICIOUS ENTITY IMPERSONATION",
+                "shortDescription": "Claims origin from fake trusted entity.",
+                "longDescription": "Checks for mismatches between claimed sender and actual content behavior.",
+                "appliesTo": ["Phishing"],
+                "failureDetails": {
+                    "reason": "The message claims to be from 'Bank of Europa', but contains a link to a suspicious domain.",
+                    "evidence": [
+                        {
+                            "location": "sender",
+                            "text": "noreply@bankofeuropa.com"
+                        },
+                        {
+                            "location": "body",
+                            "text": "Please verify your identity at http://secure-login-check.net"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "summary": {
+        "Phishing": {
+            "passed": 1,
+            "diagnostics": 1
+        },
+        "Scam": {
+            "passed": 2,
+            "diagnostics": 0
+        },
+        "Business Email Compromise": {
+            "passed": 0,
+            "diagnostics": 1
+        },
+        "Emotional Social Engineering": {
+            "passed": 1,
+            "diagnostics": 0
+        }
+    }
+}

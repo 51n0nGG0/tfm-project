@@ -5,7 +5,7 @@ import { ProgressBar } from "@fluentui/react-progress";
 import ChartsContainer from "./charts-container.component";
 import DiagnosticsAccordion from "./diagnostics-accordion.component";
 import { makeStyles } from "@fluentui/react-components";
-import { ResponsiveContainer } from "@fluentui/react-charting";
+import PassedAuditsAccordion from "./passed-audits-accordion.component";
 
 const STEPS = [
   "EXTRACTION",
@@ -21,6 +21,7 @@ const useStyles = makeStyles({
         flexDirection: "column",
         width: "100%",
         alignItems: "center",
+        maxWidth: "800px",
     }
 })
 
@@ -87,7 +88,8 @@ const Report:React.FC = () => {
             </Card>
             <div className={styles.container}>
                 <ChartsContainer/>
-                <DiagnosticsAccordion/>           
+                <DiagnosticsAccordion/>      
+                <PassedAuditsAccordion/>     
             </div>
         </div>
     );
