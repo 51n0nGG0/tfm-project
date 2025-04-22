@@ -1,7 +1,10 @@
-import React from "react"
-import { GaugeChart, GaugeChartVariant, GaugeValueFormat, ResponsiveContainer } from "@fluentui/react-charting"
-import { getChartColor } from "../utils/chart-color.util"
+import React from "react";
 
+import { GaugeChart, GaugeChartVariant } from "@fluentui/react-charting";
+
+import { GaugeValueFormat } from "@fluentui/react-charting";
+
+import { getChartColor } from "../../utils/chart-color.util"
 
 interface ChartItemProps {
     minimum: number,
@@ -9,7 +12,6 @@ interface ChartItemProps {
     value: number,
     title: string,
 }
-
 
 const ChartItem:React.FC<ChartItemProps> = ({minimum, maximum, value, title}) => {
     const color = getChartColor(minimum, maximum, value);

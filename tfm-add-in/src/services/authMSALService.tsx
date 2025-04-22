@@ -14,7 +14,7 @@ const msalConfig = {
 
 const msalInstance = new PublicClientApplication(msalConfig);
 
-async function initializeMsal() {
+export async function initializeMsal() {
     try {
         await msalInstance.initialize(); // Esperar inicialización
         console.log("MSAL inicializado correctamente.");
@@ -55,4 +55,9 @@ export async function getToken() {
         console.error("Error getting token:", error);
         return null;
     }
+}
+
+export function isUserAuthenticated(): boolean {
+    const accounts = msalInstance.getAllAccounts();
+    return accounts.length > 0;
 }

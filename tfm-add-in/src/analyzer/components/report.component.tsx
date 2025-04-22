@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Card } from "@fluentui/react-card";
 import { Button } from "@fluentui/react-button";
 import { ProgressBar } from "@fluentui/react-progress";
-import ChartsContainer from "./charts-container.component";
-import DiagnosticsAccordion from "./diagnostics-accordion.component";
+import ChartsContainer from "./charts/charts-container.component";
+import DiagnosticsAccordion from "./diagnostics/diagnostics-accordion.component";
 import { makeStyles } from "@fluentui/react-components";
-import PassedAuditsAccordion from "./passed-audits-accordion.component";
+import PassedAuditsAccordion from "./passed-audits/passed-audits-accordion.component";
+import { getMockData } from "../utils/mock.service";
 
 const STEPS = [
   "EXTRACTION",
@@ -69,15 +70,21 @@ const Report:React.FC = () => {
         }
     };
 
+    const handleMock = async () => {
+        getMockData().then((data) => {
+            console.log("Recibido:", data);
+        })
+        .catch((err) => console.error("Error:", err));  
+    }
+
     return (
         <div>
             <Card>
                 <div>
                 <h2>Análisis de Correo</h2>
-                <Button onClick={handleStart} disabled={!socketConnected}>
+                <Button onClick={handleMock}>
                     Iniciar Análisis
                 </Button>
-
                 {currentStep && (
                     <div>
                     <p>Paso actual: <strong>{currentStep.replace(/_/g, ' ')}</strong></p>

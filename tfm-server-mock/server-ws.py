@@ -55,10 +55,15 @@ def start_analysis():
     asyncio.run(fake_analysis())  # lanza el análisis en el event loop principal
     return {"status": "analysis started"}
 
-# Lanzar ambos servidores
-if __name__ == "__main__":
-    # Lanzamos WebSocket en segundo plano
-    threading.Thread(target=start_websocket_server, daemon=True).start()
+@app.route("/mock", methods=["POST"])
+def mock_response():
+    file_path = os.path.join(os.path.dirname(__file__), "mocks", "mock_response.json")
     
-    # Flask se queda en primer plano
+    with open(file_path, "r") as f:
+        data = json.load(f)
+
+    return jsonify(data)
+
+if __name__ == "__main__":
+    threading.Thread(target=start_websocket_server, daemon=True).start()
     app.run(port=5000)

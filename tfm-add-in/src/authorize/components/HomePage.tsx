@@ -6,7 +6,6 @@ import { tokens } from "@fluentui/tokens";
 import { makeStyles } from "@griffel/react/makeStyles.cjs";
 import { CheckboxProps, Checkbox} from "@fluentui/react-checkbox";
 import { LockClosed16Filled } from "@fluentui/react-icons";
-import { loginWithMicrosoft } from "../../services/authService";
 import { getToken, login } from "../../services/authMSALService";
 
 interface HomePageProps {

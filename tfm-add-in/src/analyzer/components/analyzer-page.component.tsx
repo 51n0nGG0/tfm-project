@@ -1,10 +1,12 @@
 import React from "react";
-import Report from "./report.component";
+import AnalyzerPageHeader from "./analyzer-page-header.component";
+import AnalyzerPageBody from "./analyzer-page-body.component";
 
 const AnalyzerPage: React.FC = () => {
     return(
         <>
-            <Report/>
+            <AnalyzerPageHeader/>
+            <AnalyzerPageBody/>
         </>
     );
 }

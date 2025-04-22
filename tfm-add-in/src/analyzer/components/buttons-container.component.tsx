@@ -16,15 +16,11 @@ const useStyles = makeStyles({
 
 const ButtonsContainer:React.FC = () => {
 
-    const handleClick = async () => {
-        window.location.href = "/authorize.html"
-    }
-
     const styles = useStyles();
 
     return(
         <div className={styles.container}>
-            <Button onClick={handleClick} appearance="primary" size="large">Analizar un correo ahora</Button>
+            <Button appearance="primary" size="large">Analizar correo</Button>
         </div>
     );
 }
