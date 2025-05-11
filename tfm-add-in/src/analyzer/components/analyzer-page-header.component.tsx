@@ -3,9 +3,6 @@ import React from "react";
 import { makeStyles } from "@griffel/react/makeStyles.cjs";
 import { tokens } from "@fluentui/tokens";
 
-import { Title1, Body2 } from "@fluentui/react-text";
-import ButtonsContainer from "./buttons-container.component";
-
 const useStyles = makeStyles({
     header: {
         display: "flex",

@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 
 const RecipientsTagGroup:React.FC<RecipientsTagGroupProps> = ({recipients}) => {
     
-    const items:Item[] = recipients.map((recipient)=> ({
+    const items:Item[] = recipients?.map((recipient)=> ({
         value: recipient.emailAddress.name.replace(" ", "_"),
         children: recipient.emailAddress.name,
         media: (
@@ -53,10 +53,10 @@ const RecipientsTagGroup:React.FC<RecipientsTagGroupProps> = ({recipients}) => {
     
     return(
         <div className={styles.container}>
-            <Overflow minimumVisible={2} padding={60}>
+            <Overflow minimumVisible={1} padding={60}>
                 <TagGroup className={styles.tagGroup}>
                     {
-                        items.map(({ value, ...rest })=>
+                        items?.map(({ value, ...rest })=>
                             <OverflowItem key={value} id={value!}>
                                 <InteractionTag key={value}>
                                     <InteractionTagPrimary {...rest}/>
