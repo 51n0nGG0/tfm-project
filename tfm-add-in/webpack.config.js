@@ -34,9 +34,8 @@ module.exports = async (env, options) => {
         import: ["./src/authorize/index.tsx", "./src/authorize/authorize.html"],
         dependOn: ['icons'],
       },
-      analyzer: {
-        import: ["./src/analyzer/index.tsx", "./src/analyzer/analyzer.html"],
-        dependOn: ["icons"],
+      login: {
+        import: ["./src/login/login.ts", "./src/login/login.html"],
       }
     },
     output: {
@@ -95,14 +94,14 @@ module.exports = async (env, options) => {
         chunks: ["icons","index"],
       }),
       new HtmlWebpackPlugin({
-        filename: "authorize.html",
+        filename: "authorize/authorize.html",
         template: "./src/authorize/authorize.html",
         chunks: ["icons","authorize"],
       }),
       new HtmlWebpackPlugin({
-        filename: "analyzer.html",
-        template: "./src/analyzer/analyzer.html",
-        chunks: ["icons","analyzer"],
+        filename: "login/login.html",
+        template: "./src/login/login.html",
+        chunks: ["login"],
       }),
       new CopyWebpackPlugin({
         patterns: [

@@ -40,7 +40,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.4.1",
-    "regenerator-runtime": "^0.14.1"
+    "regenerator-runtime": "^0.14.1",
+    "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
@@ -48,6 +49,7 @@
     "@babel/preset-typescript": "^7.23.3",
     "@fluentui/react-icons-font-subsetting-webpack-plugin": "^2.0.292",
     "@microsoft/microsoft-graph-types": "^2.40.0",
+    "@playwright/test": "^1.52.0",
     "@types/office-js": "^1.0.377",
     "@types/office-runtime": "^1.0.35",
     "@types/react": "^18.2.64",

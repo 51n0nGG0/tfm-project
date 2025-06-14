@@ -1,19 +1,20 @@
+import eventlet
+eventlet.monkey_patch()
 
 from flask import Flask, request
 from flask_socketio import SocketIO, emit
 import redis
-import threading
 import json
 import os
 
 app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", ping_timeout=300000, debug=True)
 
 redis_client = redis.Redis(host=os.getenv("REDIS_HOST", "localhost"), port=6379, db=0)
 pubsub = redis_client.pubsub()
 pubsub.subscribe('analyze_updates')
 
-client_sockets = {}
+clients = []
 
 @app.route('/')
 def index():
@@ -21,32 +22,33 @@ def index():
 
 @socketio.on('connect')
 def handle_connect():
-    client_id = request.args.get('client_id')
-    if client_id:
-        client_sockets[client_id] = request.sid
-        print(f"Client connected: {client_id} -> {request.sid}")
+    clients.append(request.sid)
+    print(f"[CONNECT] Cliente conectado con SID: {request.sid}")
 
 @socketio.on('disconnect')
 def handle_disconnect():
-    for cid, sid in list(client_sockets.items()):
-        if sid == request.sid:
-            print(f"Client disconnected: {cid}")
-            del client_sockets[cid]
-            break
+    clients.remove(request.sid)
+    print(f"[DISCONNECT] Cliente desconectado con SID: {request.sid}")
 
 def redis_listener():
+    print("[REDIS] Listener iniciado")
     for message in pubsub.listen():
         if message['type'] == 'message':
             try:
                 data = json.loads(message['data'])
                 client_id = data.get('client_id')
+                status = data.get('status')
                 payload = data.get('payload')
-                if client_id in client_sockets:
-                    socketio.emit('analysis_update', payload, room=client_sockets[client_id])
+                print(payload)
+                if client_id in clients:
+                    print(f"[EMIT] Emitiendo mensaje a {client_id}")
+                    socketio.emit(f'analysis_{status}', payload, to=client_id)
             except Exception as e:
-                print("Error processing message:", e)
+                print("Error procesando mensaje Redis:", e)
 
-threading.Thread(target=redis_listener, daemon=True).start()
+# Lanzar tarea en segundo plano con soporte Eventlet
+socketio.start_background_task(target=redis_listener)
 
 if __name__ == '__main__':
+    print("[APP] Iniciando servidor WebSocket en el puerto 5001...")
     socketio.run(app, host='0.0.0.0', port=5001)

@@ -1,4 +1,3 @@
-
 FROM python:3.10
 
 WORKDIR /app
@@ -8,4 +7,4 @@ RUN pip install flask flask-socketio redis eventlet
 
 ENV FLASK_ENV=development
 
-CMD ["python", "ws_server.py"]
+CMD ["python", "-u", "ws_server.py"]

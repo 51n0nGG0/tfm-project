@@ -4,8 +4,7 @@ import { Folder } from '../types/folder';
 
 const STANDARD_FOLDERS = ["inbox", "drafts", "sentitems", "deleteditems"];
 
-export async function getStandardMailFolders(): Promise<Folder[]> {
-  const accessToken = await getToken();
+export async function getStandardMailFolders(accessToken:string): Promise<Folder[]> {
   if (!accessToken) {
     console.error("No se pudo obtener el token de acceso.");
     return [];
@@ -40,8 +39,7 @@ export async function getStandardMailFolders(): Promise<Folder[]> {
   return folders;
 }
 
-export async function getFolderMessages(folder: string, nextLink?: string) {
-  const accessToken = await getToken();
+export async function getFolderMessages(folder: string, accessToken: string, nextLink?: string) {
   if (!accessToken) {
     console.error("No se pudo obtener el token de acceso.");
     return null;
@@ -75,8 +73,7 @@ export async function getFolderMessages(folder: string, nextLink?: string) {
   }
 }
 
-export async function getMessage(id: string) {
-  const accessToken = await getToken();
+export async function getMessage(id: string, accessToken:string) {
   if (!accessToken) {
     console.error("No se pudo obtener el token de acceso.");
     return null;
@@ -102,6 +99,33 @@ export async function getMessage(id: string) {
     return data;
   } catch (error) {
     console.error("Error al leer el mensaje:", error);
+    return null;
+  }
+}
+
+export async function getUserProfile(accessToken: string) {
+  if (!accessToken) {
+    console.error("No se pudo obtener el token de acceso.");
+    return null;
+  }
+
+  try {
+    const response = await fetch("https://graph.microsoft.com/v1.0/me", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error al obtener perfil: ${response.statusText}`);
+    }
+
+    const userData = await response.json();
+    console.log("Perfil de usuario:", userData);
+    return userData;
+  } catch (error) {
+    console.error("Error al obtener datos del usuario:", error);
     return null;
   }
 }

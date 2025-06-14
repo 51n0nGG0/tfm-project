@@ -6,7 +6,6 @@ import { tokens } from "@fluentui/tokens";
 import { makeStyles } from "@griffel/react/makeStyles.cjs";
 import { CheckboxProps, Checkbox} from "@fluentui/react-checkbox";
 import { LockClosed16Filled } from "@fluentui/react-icons";
-import { getToken, login } from "../../services/authMSALService";
 
 interface HomePageProps {
   title: string;
@@ -61,29 +60,8 @@ const HomePage: React.FC<HomePageProps> = (props: HomePageProps) => {
   const [checked, setChecked] = React.useState<CheckboxProps["checked"]>(false);
 
   const handleLogin = async () => {
-    try {
-      
-      const loginResponse = await login();
-
-      if (loginResponse.idToken) {
-        sessionStorage.setItem("idToken", loginResponse.idToken);
-        console.log(loginResponse.idToken);
-      }
-
-      const accessToken = await getToken();
-
-      if (accessToken) {
-        sessionStorage.setItem("accessToken", accessToken);
-        console.log("Token de acceso almacenado:", accessToken);
-
-        window.location.href = "/analyzer.html";
-      } else {
-        console.log("No se pudo obtener el token de acceso");
-      }
-    } catch (error) {
-      console.error("Error durante la autenticación", error);
-    }
-  };
+    window.location.href="/login/login.html";
+  }
 
   return (
     <div className={styles.mainContainer}>

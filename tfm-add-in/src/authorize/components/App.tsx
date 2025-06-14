@@ -17,7 +17,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
 
   return (
     <div className={styles.root}>
-      <HomePage title={props.title} logo={"assets/logo-filled.png"}></HomePage>
+      <HomePage title={props.title} logo={"/assets/icon-128.png"}></HomePage>
     </div>
   );
 };
