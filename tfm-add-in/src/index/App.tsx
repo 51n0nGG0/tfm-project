@@ -3,6 +3,7 @@ import { makeStyles } from "@griffel/react/makeStyles.cjs";
 import NavigationBar from "./components/navigation-bar/navigation-bar.component";
 import LandingPage from "./components/landingpage/landing-page.component";
 import {
+  logoutFromO365,
   signInO365,
 } from "../utilities/office-apis-helpers";
 import { useState, useCallback } from "react";
@@ -34,7 +35,7 @@ const App: React.FC<AppProps> = ({isOfficeInitialized}) => {
   const [authStatus, setAuthStatus] = useState("notLoggedIn");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const {accessToken, setAccessToken, setAccountName} = useAuth();
+  const {accessToken, setAccessToken, setAccountName } = useAuth();
 
   const boundSetState = useCallback((newState) => {
     if (newState.authStatus !== undefined) setAuthStatus(newState.authStatus);
@@ -45,9 +46,13 @@ const App: React.FC<AppProps> = ({isOfficeInitialized}) => {
     setErrorMessage(error);
   }, []);
 
-  const login = useCallback(async () => {
-    await signInO365(boundSetState, setAccessToken, setAccountName, displayError);
+  const login = useCallback(() => {
+    signInO365(boundSetState, setAccessToken, setAccountName, displayError);
   }, [boundSetState, displayError]);
+
+  const logout = useCallback(()=>{
+    logoutFromO365(boundSetState, setAccessToken, setAccountName, displayError)
+  }, [boundSetState, displayError])
 
   console.log(accessToken);
 
@@ -62,7 +67,7 @@ const App: React.FC<AppProps> = ({isOfficeInitialized}) => {
 
   return (
     <div className={styles.root}>
-      <NavigationBar/>
+      <NavigationBar logout={logout}/>
       <LandingPage 
         login={login}
       />

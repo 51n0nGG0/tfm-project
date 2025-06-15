@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../contexts/auth.context";
 import { User } from "@microsoft/microsoft-graph-types";
 import { getUserProfile } from "../../../../services/microsoftService";
-import { Body1, makeStyles, Subtitle2Stronger,  tokens } from "@fluentui/react-components";
+import { Body1, makeStyles, Subtitle2Stronger,  tokens, Tooltip } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
     container:{
@@ -40,8 +40,12 @@ const AccountInfoBody:React.FC = () => {
         <div className={styles.container}>
             <Avatar size={72} color="colorful" name={accountInfo?.userPrincipalName}/>
             <div className={styles.textContainer}>
-                <Subtitle2Stronger truncate wrap={false}>{accountInfo?.givenName + " " + accountInfo?.surname}</Subtitle2Stronger>
-                <Body1 truncate wrap={false}>{accountInfo?.mail}</Body1>
+                <Tooltip content={accountInfo?.givenName + " " + accountInfo?.surname} relationship="label">
+                    <Subtitle2Stronger truncate wrap={false}>{accountInfo?.givenName + " " + accountInfo?.surname}</Subtitle2Stronger>
+                </Tooltip>
+                <Tooltip content={accountInfo?.mail} relationship="label">
+                    <Body1 truncate wrap={false}>{accountInfo?.mail}</Body1>
+                </Tooltip>
             </div>
         </div>
     )

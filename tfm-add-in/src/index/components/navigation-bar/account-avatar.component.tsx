@@ -6,6 +6,9 @@ import { useAuth } from "../../contexts/auth.context";
 import { Button, makeStyles, Popover, PopoverSurface, PopoverTrigger } from "@fluentui/react-components";
 import AccountInfo from "./account-info/account-info.component";
 
+interface AccountAvatarProps {
+    logout: ()=>void
+}
 
 const useStyles = makeStyles({
     popoverSurface: {
@@ -16,7 +19,7 @@ const useStyles = makeStyles({
     }
 });
 
-const AccountAvatar: React.FC = () => {
+const AccountAvatar: React.FC<AccountAvatarProps> = ({logout}) => {
     const {accountName} = useAuth();
     const styles = useStyles();
 
@@ -31,7 +34,7 @@ const AccountAvatar: React.FC = () => {
                         </PopoverTrigger>
 
                         <PopoverSurface tabIndex={-1} className={styles.popoverSurface}>
-                            <AccountInfo/>
+                            <AccountInfo logout={logout}/>
                         </PopoverSurface>
                     </Popover>
                 </>

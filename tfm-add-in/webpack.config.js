@@ -36,6 +36,12 @@ module.exports = async (env, options) => {
       },
       login: {
         import: ["./src/login/login.ts", "./src/login/login.html"],
+      },
+      logout: {
+        import: ["./src/logout/logout.ts", "./src/logout/logout.html"],
+      },
+      logoutcomplete: {
+        import: ["./src/logoutcomplete/logoutcomplete.ts", "./src/logoutcomplete/logoutcomplete.html"]
       }
     },
     output: {
@@ -102,6 +108,16 @@ module.exports = async (env, options) => {
         filename: "login/login.html",
         template: "./src/login/login.html",
         chunks: ["login"],
+      }),
+      new HtmlWebpackPlugin({
+        filename: "logout/logout.html",
+        template: "./src/logout/logout.html",
+        chunks: ["logout"],
+      }),
+      new HtmlWebpackPlugin({
+        filename: "logoutcomplete/logoutcomplete.html",
+        template: "./src/logoutcomplete/logoutcomplete.html",
+        chunks: ["logoutcomplete"],
       }),
       new CopyWebpackPlugin({
         patterns: [

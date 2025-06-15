@@ -3,7 +3,7 @@ import { AppState } from '../index/App';
 let loginDialog: Office.Dialog;
 const dialogLoginUrl: string = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/authorize/authorize.html';
 
-export const signInO365 = (
+export const signInO365 = async (
     setState: (x: AppState) => void,
     setToken: (x: string) => void,
     setAccountName: (x: string) => void,
@@ -47,6 +47,55 @@ export const signInO365 = (
     };
 
     const processLoginDialogEvent = (arg) => {
+        processDialogEvent(arg, setState, displayError);
+    };
+};
+
+let logoutDialog: Office.Dialog;
+const dialogLogoutUrl: string = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/logout/logout.html';
+
+export const logoutFromO365 = async (
+    setState: (x: AppState) => void,
+    setToken: (x: string) => void,
+    setAccountName: (x: string) => void,
+    displayError: (x: string) => void) => {
+
+    Office.context.ui.displayDialogAsync(dialogLogoutUrl,
+        { height: 40, width: 30 },
+        async (result) => {
+            if (result.status === Office.AsyncResultStatus.Failed) {
+                displayError(`${result.error.code} ${result.error.message}`);
+            }
+            else {
+                logoutDialog = result.value;
+                logoutDialog.addEventHandler(Office.EventType.DialogMessageReceived, processLogoutMessage);
+                logoutDialog.addEventHandler(Office.EventType.DialogEventReceived, processLogoutDialogEvent);
+            }
+        }
+    );
+
+    const processLogoutMessage = (arg: { message: string, origin: string }) => {
+        if (arg.origin !== window.location.origin) {
+            throw new Error("Incorrect origin passed to processLogoutMessage.");
+        }
+
+        let messageFromDialog = JSON.parse(arg.message);
+        console.log(messageFromDialog);
+        if (messageFromDialog.status === 'success') {
+            logoutDialog.close();
+            setAccountName('');
+            setToken('');
+            setState({
+                authStatus: 'notLoggedIn',
+            });
+        }
+        else {
+            logoutDialog.close();
+            displayError(messageFromDialog.result);
+        }
+    };
+
+    const processLogoutDialogEvent = (arg) => {
         processDialogEvent(arg, setState, displayError);
     };
 };

@@ -7,21 +7,19 @@ Office.onReady(async () => {
         auth: {
             clientId: clientId,
             authority: 'https://login.microsoftonline.com/common',
-            redirectUri: `${window.location.origin}/login/login.html` // Must be registered as "spa" type.
+            redirectUri: `${window.location.origin}/login/login.html`
         },
         cache: {
-            cacheLocation: 'localStorage' // Needed to avoid a "login required" error.
+            cacheLocation: 'localStorage'
         }
     });
     await pca.initialize();
 
     try {
-        // handleRedirectPromise should be invoked on every page load.
         const response = await pca.handleRedirectPromise();
         if (response) {
             Office.context.ui.messageParent(JSON.stringify({ status: 'success', token: response.accessToken, userName: response.account.username}));
         } else {
-            // A problem occurred, so invoke login.
             await pca.loginRedirect({
                 scopes: ["User.Read", "Mail.ReadBasic", "Mail.Read"]
             });

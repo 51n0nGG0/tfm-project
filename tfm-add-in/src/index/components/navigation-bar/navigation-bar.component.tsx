@@ -7,6 +7,10 @@ import { Image } from "@fluentui/react-image";
 
 import AccountAvatar from "./account-avatar.component";
 
+interface NavigationBarProps {
+    logout: ()=> void
+}
+
 const useStyles = makeStyles({
     headerContainer: {
         display: "flex",
@@ -40,7 +44,7 @@ const useStyles = makeStyles({
     }
 });
 
-const NavigationBar: React.FC = () => {
+const NavigationBar: React.FC<NavigationBarProps> = ({logout}) => {
 
     const styles = useStyles();
 
@@ -53,7 +57,7 @@ const NavigationBar: React.FC = () => {
                         <h1 className={styles.h1Text}>TFM Add-in</h1>
                     </div>
                 </a>
-                <AccountAvatar/>
+                <AccountAvatar logout={logout}/>
             </header>
         </>
     );
