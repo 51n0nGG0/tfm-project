@@ -11,9 +11,9 @@ interface ChartsContainerProps {
 const useStyles = makeStyles({
     container: {
         display: "grid",
-        gridTemplateColumns: "repeat(2,200px)",
+        gridTemplateColumns: "repeat(2,140px)",
         "@media screen and (min-width: 800px)": {
-            gridTemplateColumns: "repeat(4,200px)",
+            gridTemplateColumns: "repeat(4,150px)",
         }
     }
 });
@@ -24,7 +24,8 @@ const ChartsContainer:React.FC<ChartsContainerProps> = ({summary}) => {
 
     return(
         <>
-            { summary && <div className={styles.container}>
+            { summary && 
+                <div className={styles.container}>
                     <ChartItem
                         minimum={0}
                         maximum={6}
@@ -33,22 +34,16 @@ const ChartsContainer:React.FC<ChartsContainerProps> = ({summary}) => {
                     />
                     <ChartItem
                         minimum={0}
-                        maximum={2}
+                        maximum={4}
                         value={summary["BUSINESS EMAIL COMPROMISE"].failed}
-                        title="Business Email Compromise"
+                        title="BEC"
                     />
                     <ChartItem
                         minimum={0}
-                        maximum={7}
-                        value={summary["SCAM"].failed}
-                        title="Scam"
-                    />
-                    <ChartItem
-                        minimum={0}
-                        maximum={3}
+                        maximum={8}
                         value={summary["EMOTIONAL SOCIAL ENGINEERING"].failed}
-                        title="Ingeniería social emocional"
-                    />
+                        title="ISE"
+                    />                  
                 </div>
             }
         </>

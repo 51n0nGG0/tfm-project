@@ -1,80 +1,86 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { Button, MessageBar, MessageBarActions, MessageBarBody, MessageBarGroup, MessageBarIntent, MessageBarTitle } from '@fluentui/react-components';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { Button, makeStyles, MessageBar, MessageBarActions, MessageBarBody, MessageBarGroup, MessageBarIntent, MessageBarTitle } from '@fluentui/react-components';
 import { DismissRegular } from '@fluentui/react-icons';
+import { v4 as uuidv4 } from "uuid";
 
-type NotificationIntent = MessageBarIntent; // 'info' | 'success' | 'error' | 'warning' | 'severeWarning'
+export type NotificationIntent = MessageBarIntent;
 
 interface Notification {
+  id: string;
+  title: string;
   message: string;
   intent: NotificationIntent;
 }
 
-interface NotificationContextType {
-  showMessage: (message: string, intent?: NotificationIntent) => void;
-  clearMessage: () => void;
+interface NotificationsContextType {
+  showNotification: (title: string, message: string, intent: NotificationIntent) => void;
 }
 
-const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
+const useStyles = makeStyles({
+  notificationContainer: {
+    position: 'fixed',
+    top: '0',
+    right: '0',
+    zIndex: 1000,
+    width: "100%",
+  },
+});
 
-export const NotificationProvider = ({ children }: { children: ReactNode }) => {
+const NotificationsContext = createContext<NotificationsContextType | undefined>(undefined);
+
+export const NotificationsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+
+  const styles = useStyles();
+
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
-  const showMessage = (message: string, intent: NotificationIntent = 'info') => {
-    setNotifications([]);
-    setTimeout(() => setNotifications([]), 3000); // Oculta tras 3 segundos
-  };
+  const showNotification = (title: string, message: string, intent?: NotificationIntent) => {
+    const id = uuidv4();
+    const newNotification = { id, title, message, intent};
 
-  const clearMessage = () => setNotifications([]);
+    setNotifications(prev => [...prev, newNotification]);
+
+    setTimeout(() => {
+      setNotifications(prev => prev.filter(notification => notification.id !== id));
+    }, 4000);
+  }
+
+  const dismissNotification = (id: string) => {
+    setNotifications(prev => prev.filter(notification => notification.id !== id));
+  }
 
   return (
-    <NotificationContext.Provider value={{ showMessage, clearMessage }}>
+    <NotificationsContext.Provider value={{showNotification}}>
         {children}
-        <MessageBarGroup>
-            <ErrorNotification title={''} description={''}></ErrorNotification>
-            
+        <MessageBarGroup className={styles.notificationContainer} animate="both">
+          {
+            notifications.map((notification)=>{
+              return (
+                <MessageBar key={notification.id} intent={notification.intent}>
+                  <MessageBarBody>
+                      <MessageBarTitle>{notification.title}</MessageBarTitle>
+                      {notification.message + " "}
+                  </MessageBarBody>
+                  <MessageBarActions containerAction={
+                      <Button
+                      aria-label="dismiss"
+                      appearance="transparent"
+                      icon={<DismissRegular />}
+                      onClick={()=>dismissNotification(notification.id)}
+                      />
+                  }/>
+                </MessageBar>
+              )
+            })
+          }
         </MessageBarGroup>
-    </NotificationContext.Provider>
+    </NotificationsContext.Provider>
   );
 };
 
-const ErrorNotification: React.FC<{title:string, description:string}> = ({title,description}) => {
-    return(
-        <MessageBar intent={"error"}>
-            <MessageBarBody>
-                <MessageBarTitle>{title}</MessageBarTitle>
-                {description + " "}
-            </MessageBarBody>
-            <MessageBarActions containerAction={
-                <Button
-                aria-label="dismiss"
-                appearance="transparent"
-                icon={<DismissRegular />}
-                />
-            }/>
-        </MessageBar>
-    )
-}
 
-const SuccessNotification: React.FC<{title:string, description:string}> = ({title,description}) => {
-    return(
-        <MessageBar intent={"success"}>
-            <MessageBarBody>
-                <MessageBarTitle>{title}</MessageBarTitle>
-                {description + " "}
-            </MessageBarBody>
-            <MessageBarActions containerAction={
-                <Button
-                aria-label="dismiss"
-                appearance="transparent"
-                icon={<DismissRegular />}
-                />
-            }/>
-        </MessageBar>
-    )
-}
-
-export const useNotification = (): NotificationContextType => {
-  const context = useContext(NotificationContext);
+export const useNotification = (): NotificationsContextType => {
+  const context = useContext(NotificationsContext);
   if (!context) throw new Error('useNotification must be used within a NotificationProvider');
   return context;
 };

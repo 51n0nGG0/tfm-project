@@ -6,6 +6,7 @@ import { FluentProvider } from "@fluentui/react-provider";
 
 import { AuthProvider } from "./contexts/auth.context";
 import { AnalysisProvider } from "./contexts/analysis.context";
+import { NotificationsProvider } from "./contexts/notifications.context";
 
 /* global document, Office, module, require, HTMLElement */
 
@@ -22,7 +23,9 @@ const render = () => root?.render(
   <FluentProvider theme={webLightTheme}>
     <AuthProvider>
       <AnalysisProvider>
-        <App isOfficeInitialized={isOfficeInitialized}/>
+        <NotificationsProvider>
+          <App isOfficeInitialized={isOfficeInitialized}/>
+        </NotificationsProvider>
       </AnalysisProvider>
     </AuthProvider>
   </FluentProvider>

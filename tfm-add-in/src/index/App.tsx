@@ -10,6 +10,7 @@ import { useState, useCallback } from "react";
 import AnalyzerPage from "./components/analyzer-page.component";
 import { Spinner } from "@fluentui/react-components";
 import { useAuth } from "./contexts/auth.context";
+import  {NotificationIntent, useNotification } from "./contexts/notifications.context";
 
 const useStyles = makeStyles({
   root: {
@@ -22,37 +23,30 @@ export interface AppProps {
 }
 
 export interface AppState {
-  authStatus?: string;
-  fileFetch?: string;
-  headerMessage?: string;
-  errorMessage?: string;
+  authStatus: string;
 }
 
 const App: React.FC<AppProps> = ({isOfficeInitialized}) => {
 
   const styles = useStyles();
 
+  const {showNotification} = useNotification();
+
   const [authStatus, setAuthStatus] = useState("notLoggedIn");
-  const [errorMessage, setErrorMessage] = useState("");
 
   const {accessToken, setAccessToken, setAccountName } = useAuth();
 
   const boundSetState = useCallback((newState) => {
     if (newState.authStatus !== undefined) setAuthStatus(newState.authStatus);
-    if (newState.errorMessage !== undefined) setErrorMessage(newState.errorMessage);
-  }, []);
-
-  const displayError = useCallback((error: string) => {
-    setErrorMessage(error);
   }, []);
 
   const login = useCallback(() => {
-    signInO365(boundSetState, setAccessToken, setAccountName, displayError);
-  }, [boundSetState, displayError]);
+    signInO365(boundSetState, setAccessToken, setAccountName, showNotification);
+  }, [boundSetState]);
 
   const logout = useCallback(()=>{
-    logoutFromO365(boundSetState, setAccessToken, setAccountName, displayError)
-  }, [boundSetState, displayError])
+    logoutFromO365(boundSetState, setAccessToken, setAccountName, showNotification)
+  }, [boundSetState])
 
   console.log(accessToken);
 

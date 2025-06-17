@@ -5,7 +5,7 @@ enum StatusColor {
 }
 
 const LOW_THRESHOLD = 30;
-const MEDIUM_THRESHOLD = 80;
+const MEDIUM_THRESHOLD = 70;
 
 export function getChartColor(min: number, max: number, value: number): StatusColor {
     const chartPercentage = calculatePercentage(min, max, value);

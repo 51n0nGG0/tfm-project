@@ -28,7 +28,7 @@ def get_urgent_language_label(text):
 def get_emotional_tone_label(text):
     print("Analizando tono emocional o dramático")
     instruction = (
-        "Label the emotional tone of the following email using one of the following labels: EMOTIONAL or NEUTRAL.\n\n"
+        "Label the EMOTIONAL TONE of the following email using one of the following labels: EMOTIONAL or NEUTRAL.\n\n"
         "- EMOTIONAL: The message uses emotionally manipulative, intense, or persuasive language intended to influence or provoke a reaction.\n"
         "- NEUTRAL: The message is objective, informational, and lacks emotionally charged language.\n\n"
         "The text to analyze is:\n\"{TEXT}\"\n\n"

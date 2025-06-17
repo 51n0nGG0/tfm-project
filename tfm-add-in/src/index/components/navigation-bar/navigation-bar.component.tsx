@@ -21,17 +21,7 @@ const useStyles = makeStyles({
         padding: tokens.spacingHorizontalMNudge,
         boxSizing: "border-box"
     },
-    link: {
-        textDecoration: "none",
-        color: tokens.colorNeutralBackgroundStatic,
-        ':active': {
-            color: tokens.colorNeutralBackgroundStatic,
-        },
-        ':hover': {
-            color: tokens.colorNeutralBackgroundStatic,
-        }
-    },
-    linkContainer: {
+    titleContainer: {
         display: "flex",
         flexDirection: "row",
         gap: "10px",
@@ -51,12 +41,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({logout}) => {
     return (
         <>
             <header className={styles.headerContainer}>
-                <a className={"homeicon" + styles.link} href="/authorize.html">
-                    <div className={styles.linkContainer}>
-                        <Image width="40" height="40" src={"/assets/icon-64.png"} alt={"Home page logo"} />
-                        <h1 className={styles.h1Text}>TFM Add-in</h1>
-                    </div>
-                </a>
+                <div className={styles.titleContainer}>
+                    <Image width="40" height="40" src={"/assets/icon-64.png"} alt={"Home page logo"} />
+                    <h1 className={styles.h1Text}>TFM Add-in</h1>
+                </div>
                 <AccountAvatar logout={logout}/>
             </header>
         </>

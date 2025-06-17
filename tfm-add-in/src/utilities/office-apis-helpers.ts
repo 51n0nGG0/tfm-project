@@ -1,4 +1,5 @@
 import { AppState } from '../index/App';
+import { NotificationIntent } from '../index/contexts/notifications.context';
 
 let loginDialog: Office.Dialog;
 const dialogLoginUrl: string = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/authorize/authorize.html';
@@ -7,7 +8,7 @@ export const signInO365 = async (
     setState: (x: AppState) => void,
     setToken: (x: string) => void,
     setAccountName: (x: string) => void,
-    displayError: (x: string) => void) => {
+    showNotification: (title: string, message:string, displayNotification: NotificationIntent) => void) => {
 
     setState({ authStatus: 'loginInProcess' });
 
@@ -16,7 +17,7 @@ export const signInO365 = async (
         { height: 40, width: 30},
         (result) => {
             if (result.status === Office.AsyncResultStatus.Failed) {
-                displayError(`${result.error.code} ${result.error.message}`);
+                showNotification(`${result.error.code}`, `${result.error.message}`, "error");
             }
             else {
                 loginDialog = result.value;
@@ -39,15 +40,16 @@ export const signInO365 = async (
             setState({
                 authStatus: 'loggedIn',
             });
+            showNotification("Inicio de sesión correcto", "Se ha realizado correctamente el inicio de sesión. Bienvenido " + messageFromDialog.userName + ".", "success");
         }
         else {
             loginDialog.close();
-            displayError(messageFromDialog.result);
+            showNotification(messageFromDialog.result.errorMessage, messageFromDialog.result.message, "error");
         }
     };
 
     const processLoginDialogEvent = (arg) => {
-        processDialogEvent(arg, setState, displayError);
+        processDialogEvent(arg, setState, showNotification);
     };
 };
 
@@ -58,13 +60,13 @@ export const logoutFromO365 = async (
     setState: (x: AppState) => void,
     setToken: (x: string) => void,
     setAccountName: (x: string) => void,
-    displayError: (x: string) => void) => {
+    showNotification: (title: string, message:string, displayNotification: NotificationIntent) => void) => {
 
     Office.context.ui.displayDialogAsync(dialogLogoutUrl,
         { height: 40, width: 30 },
         async (result) => {
             if (result.status === Office.AsyncResultStatus.Failed) {
-                displayError(`${result.error.code} ${result.error.message}`);
+                showNotification(`${result.error.code}`, `${result.error.message}`, "error");
             }
             else {
                 logoutDialog = result.value;
@@ -88,36 +90,38 @@ export const logoutFromO365 = async (
             setState({
                 authStatus: 'notLoggedIn',
             });
+            showNotification("Cierre de sesión correcto", "Se ha realizado correctamente el cierre de sesión.", "success");
         }
         else {
             logoutDialog.close();
-            displayError(messageFromDialog.result);
+            showNotification(messageFromDialog.result.errorMessage, messageFromDialog.result.message, "error");
         }
     };
 
     const processLogoutDialogEvent = (arg) => {
-        processDialogEvent(arg, setState, displayError);
+        processDialogEvent(arg, setState, showNotification);
     };
 };
 
 const processDialogEvent = (arg: { error: number, type: string },
     setState: (x: AppState) => void,
-    displayError: (x: string) => void) => {
+    showNotification: (title: string, message:string, displayNotification: NotificationIntent) => void) => {
 
     switch (arg.error) {
         case 12002:
-            displayError('The dialog box has been directed to a page that it cannot find or load, or the URL syntax is invalid.');
+            showNotification("Redirección inválida", 'El dialogo ha sido redireccionado a una página que no existe o no se puede cargar, o la sintaxis de la URL es inválida.', "error");
             break;
         case 12003:
-            displayError('The dialog box has been directed to a URL with the HTTP protocol. HTTPS is required.');
+            showNotification("HTTPS requerido", 'El el dialogo ha sido redireccionado a una URL con protocolo HTTP.', "error");
             break;
         case 12006:
             setState({
                 authStatus: 'notLoggedIn',
             });
+            showNotification("Cierre de sesión cancelado", "Se ha cerrado el díalogo y no se ha completado el proceso de cierre de sesión.", "warning")
             break;
         default:
-            displayError('Unknown error in dialog box.');
+            showNotification("Error desconocido", 'Ha ocurrido un error desconocido en el diálogo durante el proceso.', "error");
             break;
     }
 };

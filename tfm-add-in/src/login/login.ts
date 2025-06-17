@@ -21,7 +21,7 @@ Office.onReady(async () => {
             Office.context.ui.messageParent(JSON.stringify({ status: 'success', token: response.accessToken, userName: response.account.username}));
         } else {
             await pca.loginRedirect({
-                scopes: ["User.Read", "Mail.ReadBasic", "Mail.Read"]
+                scopes: ["User.Read", "Mail.ReadBasic", "Mail.Read"],
             });
         }
     } catch (error) {
