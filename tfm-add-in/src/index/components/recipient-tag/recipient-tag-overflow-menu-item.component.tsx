@@ -1,16 +1,15 @@
 import React from "react"
 
-import { makeStyles } from "@griffel/react/makeStyles.cjs";
-import { tokens } from "@fluentui/tokens";
-import { shorthands } from "@griffel/react/index.cjs";
-import { tagClassNames } from "@fluentui/react-tags";
-
 import { MenuItem } from "@fluentui/react-menu";
 import { Tag } from "@fluentui/react-tags";
 
-import { TagProps } from "@fluentui/react-components";
+import { TagProps, tagClassNames } from "@fluentui/react-tags";
 
 import { useIsOverflowItemVisible } from "@fluentui/react-overflow";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
+import { shorthands } from "@griffel/react/index.cjs";
+import { tokens } from "@fluentui/tokens";
 
 interface RecipientTagOverflowMenuItemProps {
     tag: TagProps,

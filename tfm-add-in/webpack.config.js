@@ -31,7 +31,7 @@ module.exports = async (env, options) => {
         dependOn: ['icons'],
       },
       authorize: {
-        import: ["./src/authorize/index.tsx", "./src/authorize/authorize.html"],
+        import: ["./src/authorize/authorize.tsx", "./src/authorize/authorize.html"],
         dependOn: ['icons'],
       },
       login: {

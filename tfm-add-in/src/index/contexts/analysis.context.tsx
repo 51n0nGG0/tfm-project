@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import { getMessage } from "../../services/microsoftService";
+import { getMessage } from "../services/microsoft-api.service";
 import { useAuth } from "./auth.context";
 import { Report } from "../types/report";
 

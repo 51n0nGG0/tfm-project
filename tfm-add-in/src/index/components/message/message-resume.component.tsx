@@ -1,15 +1,15 @@
 import React from "react";
 
-import { makeStyles } from "@griffel/react/makeStyles.cjs";
-import { tokens } from "@fluentui/tokens";
-
 import { Avatar } from "@fluentui/react-avatar";
 import { Body2, Caption1, Caption1Strong } from "@fluentui/react-text";
 import { Divider } from "@fluentui/react-divider";
 
 import { Message } from "@microsoft/microsoft-graph-types";
-import { mergeClasses } from "@fluentui/react-components";
-import SelectedMessagePanel from "../message-panel/selected-message-panel.component";
+
+import { mergeClasses } from "@griffel/core/mergeClasses.cjs";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
+import { tokens } from "@fluentui/tokens";
 
 interface MailResumeProps {
     message: Message,

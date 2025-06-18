@@ -1,9 +1,14 @@
-import {  TabValue, SelectTabEvent, SelectTabData, Card, CardHeader, CardFooter, CardPreview, Title2 } from "@fluentui/react-components";
-import React, {useEffect, useState} from "react";
+import React from "react";
+
 import MessageTabList from "./message-tab/message-tab-list.component";
 import OtherMessagePanel from "./message-panel/other-message-panel.component";
 import SelectedMessagePanel from "./message-panel/selected-message-panel.component";
-import { isInsideOutlook } from "../../services/outlookService";
+
+import { isInsideOutlook } from "../services/outlook-client.service";
+
+import { TabValue, SelectTabEvent, SelectTabData } from "@fluentui/react-tabs";
+
+import {useEffect, useState} from "react";
 
 type TabItem = {
     id: string;

@@ -7,8 +7,8 @@ Office.onReady(() => {
             errorCode: `Logout failed on redirect: ${window.location.href}`
         };
         Office.context.ui.messageParent(JSON.stringify({
-           status: "failed",
-           result: errorData,
+            status: "failed",
+            result: errorData,
         }));
     } else {
         Office.context.ui.messageParent(JSON.stringify({ status: 'success' }));

@@ -1,11 +1,11 @@
 import React from "react"
 
-import { makeStyles } from "@griffel/react/makeStyles.cjs";
-import { tokens } from "@fluentui/tokens";
-
 import { Image } from "@fluentui/react-image";
 
 import AccountAvatar from "./account-avatar.component";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
+import { tokens } from "@fluentui/tokens";
 
 interface NavigationBarProps {
     logout: ()=> void

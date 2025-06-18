@@ -1,16 +1,18 @@
-import * as React from "react";
-import { makeStyles } from "@griffel/react/makeStyles.cjs";
+import React from "react";
+
+import { Spinner } from "@fluentui/react-spinner";
+
 import NavigationBar from "./components/navigation-bar/navigation-bar.component";
-import LandingPage from "./components/landingpage/landing-page.component";
-import {
-  logoutFromO365,
-  signInO365,
-} from "../utilities/office-apis-helpers";
+import LandingPanel from "./components/landing-panel/landing-panel.component";
+import AnalyzerPanel from "./components/analyzer-panel.component";
+
+import { logoutFromO365, signInO365 } from "../helpers/office-api.helper";
+
 import { useState, useCallback } from "react";
-import AnalyzerPage from "./components/analyzer-page.component";
-import { Spinner } from "@fluentui/react-components";
 import { useAuth } from "./contexts/auth.context";
-import  {NotificationIntent, useNotification } from "./contexts/notifications.context";
+import { useNotification } from "./contexts/notifications.context";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
 
 const useStyles = makeStyles({
   root: {
@@ -62,11 +64,11 @@ const App: React.FC<AppProps> = ({isOfficeInitialized}) => {
   return (
     <div className={styles.root}>
       <NavigationBar logout={logout}/>
-      <LandingPage 
+      <LandingPanel
         login={login}
       />
       {
-        authStatus === "loggedIn" && <AnalyzerPage/>
+        authStatus === "loggedIn" && <AnalyzerPanel/>
       }
     </div>
   );

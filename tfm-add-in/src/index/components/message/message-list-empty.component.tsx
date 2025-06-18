@@ -4,7 +4,6 @@ import { Body1, Subtitle1 } from "@fluentui/react-text";
 import { Mail48Regular } from "@fluentui/react-icons";
 
 import { makeStyles } from "@griffel/react/makeStyles.cjs";
-import { tokens } from "@fluentui/tokens";
 
 const useStyles = makeStyles({
     container: {

@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import {TabList, Tab, TabValue, SelectTabEvent, SelectTabData} from "@fluentui/react-tabs";
-
-import { isInsideOutlook } from "../../../services/outlookService";
 
 interface MailTabListProps {
     selectedValue: TabValue,

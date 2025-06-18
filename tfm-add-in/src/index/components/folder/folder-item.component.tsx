@@ -1,11 +1,15 @@
 import React from "react";
 
-import { Body1 } from "@fluentui/react-text";
-import { Button, CounterBadge, makeStyles, Tab, Tooltip } from "@fluentui/react-components";
-import { Folder } from "../../../types/folder";
-import { FluentIcon } from "@fluentui/react-icons";
-import { tokens } from "@fluentui/react-components";
-import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { CounterBadge } from "@fluentui/react-badge";
+import { Tab } from "@fluentui/react-tabs";
+import { Tooltip } from "@fluentui/react-tooltip";
+
+import { Folder } from "../../types/folder";
+
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
+import { tokens } from "@fluentui/tokens";
 
 interface MailFolderItemProps {
     icon: React.JSX.Element,

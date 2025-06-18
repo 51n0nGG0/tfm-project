@@ -1,8 +1,11 @@
 import React from "react";
 
-import { InteractionTag, InteractionTagPrimary, Menu, MenuItem, MenuList, MenuPopover, MenuTrigger, useOverflowMenu } from "@fluentui/react-components";
+import { InteractionTag, InteractionTagPrimary } from "@fluentui/react-tags";
+import { Menu, MenuList, MenuPopover, MenuTrigger} from "@fluentui/react-menu";
 
 import RecipientTagOverflowMenuItem from "./recipient-tag-overflow-menu-item.component";
+
+import { useOverflowMenu } from "@fluentui/react-overflow";
 
 import { Item } from "../../types/item";
 

@@ -1,9 +1,18 @@
+import React from "react";
+
 import { Avatar } from "@fluentui/react-avatar";
-import React, { useEffect, useState } from "react";
-import { useAuth } from "../../../contexts/auth.context";
+import { Body1, Subtitle2Stronger } from "@fluentui/react-text";
+import { Tooltip } from "@fluentui/react-tooltip";
+
+import { getUserProfile } from "../../../services/microsoft-api.service";
+
 import { User } from "@microsoft/microsoft-graph-types";
-import { getUserProfile } from "../../../../services/microsoftService";
-import { Body1, makeStyles, Subtitle2Stronger,  tokens, Tooltip } from "@fluentui/react-components";
+
+import { useEffect, useState } from "react";
+import { useAuth } from "../../../contexts/auth.context";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
+import { tokens } from "@fluentui/tokens";
 
 const useStyles = makeStyles({
     container:{

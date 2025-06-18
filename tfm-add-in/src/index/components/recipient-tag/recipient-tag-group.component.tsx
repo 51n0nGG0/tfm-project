@@ -1,7 +1,5 @@
 import React from "react";
 
-import { makeStyles } from "@griffel/react/makeStyles.cjs";
-
 import { Avatar } from "@fluentui/react-avatar";
 import { InteractionTag, InteractionTagPrimary, TagGroup } from "@fluentui/react-tags"
 import { Overflow, OverflowItem } from "@fluentui/react-overflow"; 
@@ -10,6 +8,8 @@ import RecipientTagOverflowMenu from "./recipient-tag-overflow-menu.component";
 
 import { InteractionTagPrimaryProps } from "@fluentui/react-tags";
 import { Recipient } from "@microsoft/microsoft-graph-types";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
 
 interface RecipientsTagGroupProps {
     recipients: Recipient[]

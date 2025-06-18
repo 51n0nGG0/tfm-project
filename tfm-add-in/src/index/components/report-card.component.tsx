@@ -1,9 +1,15 @@
-import { Card, makeStyles, tokens } from "@fluentui/react-components";
 import React from "react";
+
+import { Card } from "@fluentui/react-card";
+
 import ChartsContainer from "./charts/charts-container.component";
-import DiagnosticsAccordion from "./diagnostics/diagnostics-accordion.component";
-import PassedAuditsAccordion from "./passed-audits/passed-audits-accordion.component";
+import DiagnosticsAccordion from "./diagnostics-accordion/diagnostics-accordion.component";
+import PassedAuditsAccordion from "./passed-audits-accordion/passed-audits-accordion.component";
+
 import { useAnalysis } from "../contexts/analysis.context";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
+import { tokens } from "@fluentui/tokens";
 
 const useStyles = makeStyles({
     card: {

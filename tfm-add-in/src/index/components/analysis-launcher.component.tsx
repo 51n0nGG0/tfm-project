@@ -1,8 +1,14 @@
-import { Button } from "@fluentui/react-button";
-import { Field, makeStyles, Spinner, tokens } from "@fluentui/react-components";
-import { ProgressBar } from "@fluentui/react-progress";
 import React from "react";
+
+import { Button } from "@fluentui/react-button";
+import { Field } from "@fluentui/react-field";
+import { Spinner } from "@fluentui/react-spinner";
+import { ProgressBar } from "@fluentui/react-progress";
+
 import { useAnalysis } from "../contexts/analysis.context";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
+import { tokens } from "@fluentui/tokens";
 
 interface AnalysisLauncherProps {
     onClick: () => void,

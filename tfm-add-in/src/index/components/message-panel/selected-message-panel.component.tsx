@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
-import MessageDetails from "../message/message-details.component";
-import { getSelectedMessageId } from "../../../services/outlookService";
-import { Card } from "@fluentui/react-card";
+import React from "react";
+
 import AnalysisLauncher from "../analysis-launcher.component";
+import MessageDetails from "../message/message-details.component";
+
+import { getSelectedMessageId } from "../../services/outlook-client.service";
+
+import { useEffect, useState } from "react";
 import { useAnalysis } from "../../contexts/analysis.context";
 
 const SelectedMessagePanel: React.FC = () => {

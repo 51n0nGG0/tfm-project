@@ -1,8 +1,10 @@
 import React from "react";
 
 import ChartItem from "./chart-item.component";
-import { makeStyles, tokens } from "@fluentui/react-components";
+
 import { SummaryItem } from "../../types/report";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
 
 interface ChartsContainerProps {
     summary: Record<string, SummaryItem>;

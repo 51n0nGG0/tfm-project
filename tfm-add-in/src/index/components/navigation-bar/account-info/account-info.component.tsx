@@ -1,7 +1,9 @@
 import React from "react";
-import { makeStyles, tokens } from "@fluentui/react-components";
+
 import AccountInfoHeader from "./account-info-header.component";
 import AccountInfoBody from "./account-info-body.component";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
 
 interface AccountInfoProps {
     logout: ()=> void

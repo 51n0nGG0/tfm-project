@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { makeStyles } from "@griffel/react/makeStyles.cjs";
-import { tokens } from "@fluentui/tokens";
-
 import { Label } from "@fluentui/react-label";
 import { Tag } from "@fluentui/react-tags";
 import { Avatar } from "@fluentui/react-avatar";
@@ -11,9 +8,12 @@ import { Textarea } from "@fluentui/react-textarea";
 
 import RecipientsTagGroup from "../recipient-tag/recipient-tag-group.component";
 import { Message } from "@microsoft/microsoft-graph-types";
-import { getMessage } from "../../../services/microsoftService";
+import { getMessage } from "../../services/microsoft-api.service";
 
 import { useAuth } from "../../contexts/auth.context";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
+import { tokens } from "@fluentui/tokens";
 
 interface MessageDetailsProps {
     messageId: string,

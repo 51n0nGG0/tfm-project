@@ -1,18 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 
-import { useStaticVirtualizerMeasure, Virtualizer } from "@fluentui/react-virtualizer";
-import { Skeleton, SkeletonItem, Spinner } from "@fluentui/react-components";
-
-import { Message } from "@microsoft/microsoft-graph-types";
-
-import { makeStyles } from "@griffel/react/makeStyles.cjs";
-
-import { getFolderMessages } from "../../../services/microsoftService";
+import { Virtualizer } from "@fluentui/react-virtualizer";
+import { Skeleton, SkeletonItem } from "@fluentui/react-skeleton";
+import { Spinner } from "@fluentui/react-spinner";
 
 import MailResume from "./message-resume.component";
 import MessageListEmpty from "./message-list-empty.component";
-import { useAuth } from "../../contexts/auth.context";
 
+import { Message } from "@microsoft/microsoft-graph-types";
+
+import { getFolderMessages } from "../../services/microsoft-api.service";
+
+import { useEffect, useRef, useState } from "react";
+import { useAuth } from "../../contexts/auth.context";
+import { useStaticVirtualizerMeasure } from "@fluentui/react-virtualizer";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
 
 interface MailListProps {
     selectedFolder: string,

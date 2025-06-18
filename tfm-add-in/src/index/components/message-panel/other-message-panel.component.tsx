@@ -1,16 +1,21 @@
+import React from "react";
+
 import { Card } from "@fluentui/react-card";
-import { Divider, makeStyles, tokens } from "@fluentui/react-components";
-import React, { useRef, useState } from "react";
-import { Message } from "@microsoft/microsoft-graph-types";
+import { Divider } from "@fluentui/react-divider";
+
+import AnalysisLauncher from "../analysis-launcher.component";
 import FolderList from "../folder/folder-list.component";
-import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import MailList from "../message/message-list.component";
 import MessageDetails from "../message/message-details.component";
-import AnalysisLauncher from "../analysis-launcher.component";
-import { io, Socket } from "socket.io-client";
-import { getMessage } from "../../../services/microsoftService";
-import { useAuth } from "../../contexts/auth.context";
+
+import { Message } from "@microsoft/microsoft-graph-types";
+
+import { useState } from "react";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { useAnalysis } from "../../contexts/analysis.context";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
+import { tokens } from "@fluentui/tokens";
 
 const useStyles = makeStyles({
     card: {
@@ -29,8 +34,6 @@ const useStyles = makeStyles({
         height: "100%",
     }
 });
-
-
 
 const OtherMessagePanel: React.FC= () => {
 

@@ -1,12 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import { List, ListItem } from "@fluentui/react-list";
-import { getStandardMailFolders } from "../../../services/microsoftService";
-
-import { MailFolder } from "@microsoft/microsoft-graph-types";
-import FolderItem from "./folder-item.component";
-import { makeStyles, Skeleton, SkeletonItem, Subtitle2, TabList } from "@fluentui/react-components";
-import { Folder } from "../../../types/folder";
+import { Skeleton, SkeletonItem } from "@fluentui/react-skeleton";
+import { TabList } from "@fluentui/react-tabs";
 import { 
     DeleteRegular, 
     DeleteFilled, 
@@ -18,7 +13,17 @@ import {
     SendFilled,
     bundleIcon
 } from "@fluentui/react-icons";
+
+import FolderItem from "./folder-item.component";
+
+import { Folder } from "../../types/folder";
+
+import { useState, useEffect } from "react"; 
 import { useAuth } from "../../contexts/auth.context";
+
+import { getStandardMailFolders } from "../../services/microsoft-api.service";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
 
 const Delete = bundleIcon(DeleteFilled, DeleteRegular);
 const MailEdit = bundleIcon(MailEditFilled, MailEditRegular);

@@ -1,5 +1,10 @@
 import React from "react";
-import { makeStyles, Image, Button, tokens} from "@fluentui/react-components";
+
+import { Image } from "@fluentui/react-image";
+import { Button } from "@fluentui/react-button";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
+import { tokens } from "@fluentui/tokens";
 
 interface AccountInfoHeaderProps {
     logout: ()=> void

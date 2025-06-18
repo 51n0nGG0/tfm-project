@@ -1,7 +1,12 @@
-import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { Button, makeStyles, MessageBar, MessageBarActions, MessageBarBody, MessageBarGroup, MessageBarIntent, MessageBarTitle } from '@fluentui/react-components';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+
+import { Button } from "@fluentui/react-button";
+import { MessageBar, MessageBarActions, MessageBarBody, MessageBarGroup, MessageBarIntent, MessageBarTitle } from '@fluentui/react-message-bar';
 import { DismissRegular } from '@fluentui/react-icons';
+
 import { v4 as uuidv4 } from "uuid";
+
+import { makeStyles } from "@griffel/react/makeStyles.cjs";
 
 export type NotificationIntent = MessageBarIntent;
 
