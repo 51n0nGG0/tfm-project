@@ -7,7 +7,7 @@ import { makeStyles } from "@griffel/react/makeStyles.cjs";
 import { tokens } from "@fluentui/tokens";
 
 const useStyles = makeStyles({
-    mainComponent: {
+    container: {
         display: "flex",
         flexDirection: "column",
         alignContent: "center",
@@ -28,10 +28,10 @@ const LandingPanel: React.FC<LandingPanelProps> = ({login}) => {
 
     return (
         <>
-            <main className={styles.mainComponent}>
+            <div className={styles.container}>
                 <InformationCard login={login}/>
                 <InstructionsCard/>
-            </main>
+            </div>
         </>
     );
 }

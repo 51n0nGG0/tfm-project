@@ -26,7 +26,7 @@ const AccountInfoHeader:React.FC<AccountInfoHeaderProps> = ({logout}) => {
 
     return (
         <div className={styles.container}>
-            <Image className={styles.icon}  alt="" src="/assets/icon-32.png"/>
+            <Image className={styles.icon} alt="Logo de la aplicación TFM Add-in" src="/assets/icon-32.png"/>
             <Button shape="square" appearance="subtle" onClick={logout}>Cerrar sesión</Button>
         </div>
     )

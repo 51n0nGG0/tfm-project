@@ -42,7 +42,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({logout}) => {
         <>
             <header className={styles.headerContainer}>
                 <div className={styles.titleContainer}>
-                    <Image width="40" height="40" src={"/assets/icon-64.png"} alt={"Home page logo"} />
+                    <Image width="40" height="40" src={"/assets/icon-64.png"} alt={"Logo de la aplicación TFM Add-in"} />
                     <h1 className={styles.h1Text}>TFM Add-in</h1>
                 </div>
                 <AccountAvatar logout={logout}/>

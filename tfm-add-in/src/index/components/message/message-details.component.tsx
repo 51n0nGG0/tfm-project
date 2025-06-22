@@ -11,9 +11,11 @@ import { Message } from "@microsoft/microsoft-graph-types";
 import { getMessage } from "../../services/microsoft-api.service";
 
 import { useAuth } from "../../contexts/auth.context";
+import { useId } from "@fluentui/react-utilities";
 
 import { makeStyles } from "@griffel/react/makeStyles.cjs";
 import { tokens } from "@fluentui/tokens";
+
 
 interface MessageDetailsProps {
     messageId: string,
@@ -62,6 +64,9 @@ const MessageDetails:React.FC<MessageDetailsProps> = ({messageId}) => {
 
     const {accessToken} = useAuth();
 
+    const subjectId = useId("subject-input");
+    const contentId = useId("content-textarea");
+
     useEffect(()=>{
         async function fetchMessage() {
             setIsLoading(true);
@@ -81,7 +86,7 @@ const MessageDetails:React.FC<MessageDetailsProps> = ({messageId}) => {
         <div>
             <div className={styles.tagContainer}>
                 <Label weight="semibold">De:</Label>
-                <Tag media={<Avatar name={message?.sender?.emailAddress?.name} color="colorful"/>}
+                <Tag media={<Avatar name={message?.sender?.emailAddress?.name} color="colorful" aria-label={"Icono de la cuenta " + message?.sender?.emailAddress?.name}/>}
                     secondaryText={message?.sender?.emailAddress?.address}
                 >
                     {message?.sender?.emailAddress?.name}
@@ -92,12 +97,12 @@ const MessageDetails:React.FC<MessageDetailsProps> = ({messageId}) => {
                 <RecipientsTagGroup recipients={message?.toRecipients}/>
             </div>
             <div className={styles.tagContainer}>
-                <Label weight="semibold">Asunto:</Label>
-                <Input className={styles.input} value={message?.subject || ''} disabled/>
+                <Label htmlFor={subjectId} weight="semibold">Asunto:</Label>
+                <Input id={subjectId} className={styles.input} value={message?.subject || ''} disabled/>
             </div>
             <div className={styles.tagContainer}>
-                <Label weight="semibold">Contenido:</Label>
-                <Textarea className={styles.textarea} value={message?.body?.content || ''} disabled/>
+                <Label htmlFor={contentId} weight="semibold">Contenido:</Label>
+                <Textarea id={contentId} className={styles.textarea} value={message?.body?.content || ''} disabled/>
             </div>
         </div>
     );

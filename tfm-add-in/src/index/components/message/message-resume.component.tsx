@@ -62,7 +62,7 @@ const MailResume: React.FC<MailResumeProps> = ({message, selectedMessage, onSele
 
     return(
         <div className={selectedMessage?.id === message?.id ? selected : styles.resumeContainer } onClick={()=>onSelectMessage(message)}>
-            <div className={message.isRead ? read : notRead}>
+            <div tabIndex={0} className={message.isRead ? read : notRead}>
                 <Avatar className={styles.avatar} size={48} shape="square" name={message.sender.emailAddress.name} color="colorful"/>
                 <div className={styles.textContainer}>
                     <Body2 className={styles.text}>{message.sender?.emailAddress.name + "<" + message.sender?.emailAddress.address + ">"}</Body2>

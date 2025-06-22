@@ -57,28 +57,30 @@ export const NotificationsProvider: React.FC<{ children: ReactNode }> = ({ child
   return (
     <NotificationsContext.Provider value={{showNotification}}>
         {children}
-        <MessageBarGroup className={styles.notificationContainer} animate="both">
-          {
-            notifications.map((notification)=>{
-              return (
-                <MessageBar key={notification.id} intent={notification.intent}>
-                  <MessageBarBody>
-                      <MessageBarTitle>{notification.title}</MessageBarTitle>
-                      {notification.message + " "}
-                  </MessageBarBody>
-                  <MessageBarActions containerAction={
-                      <Button
-                      aria-label="dismiss"
-                      appearance="transparent"
-                      icon={<DismissRegular />}
-                      onClick={()=>dismissNotification(notification.id)}
-                      />
-                  }/>
-                </MessageBar>
-              )
-            })
-          }
-        </MessageBarGroup>
+        <aside className={styles.notificationContainer}>
+          <MessageBarGroup animate="both">
+            {
+              notifications.map((notification)=>{
+                return (
+                  <MessageBar key={notification.id} intent={notification.intent}>
+                    <MessageBarBody>
+                        <MessageBarTitle>{notification.title}</MessageBarTitle>
+                        {notification.message + " "}
+                    </MessageBarBody>
+                    <MessageBarActions containerAction={
+                        <Button
+                        aria-label="dismiss"
+                        appearance="transparent"
+                        icon={<DismissRegular />}
+                        onClick={()=>dismissNotification(notification.id)}
+                        />
+                    }/>
+                  </MessageBar>
+                )
+              })
+            }
+          </MessageBarGroup>
+        </aside>
     </NotificationsContext.Provider>
   );
 };

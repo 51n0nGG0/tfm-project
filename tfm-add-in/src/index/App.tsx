@@ -64,12 +64,14 @@ const App: React.FC<AppProps> = ({isOfficeInitialized}) => {
   return (
     <div className={styles.root}>
       <NavigationBar logout={logout}/>
-      <LandingPanel
-        login={login}
-      />
-      {
-        authStatus === "loggedIn" && <AnalyzerPanel/>
-      }
+      <main>
+        <LandingPanel
+          login={login}
+        />
+        {
+          authStatus === "loggedIn" && <AnalyzerPanel/>
+        }
+      </main>
     </div>
   );
 };

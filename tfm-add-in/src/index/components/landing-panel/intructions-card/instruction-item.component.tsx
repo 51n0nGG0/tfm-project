@@ -2,11 +2,12 @@ import React from "react";
 
 import { Image } from "@fluentui/react-image";
 
+import { Instruction } from "../../../interfaces/instruction.interface";
+
 import { makeStyles } from "@griffel/react/makeStyles.cjs";
 
 interface LandingPageCardBodyItemProps {
-    imagePath: string,
-    text: string,
+    instruction: Instruction;
 }
 
 const useStyles = makeStyles({
@@ -21,13 +22,13 @@ const useStyles = makeStyles({
     }
 })
 
-const InstructionItem: React.FC<LandingPageCardBodyItemProps> = ({imagePath, text}) => {
+const InstructionItem: React.FC<LandingPageCardBodyItemProps> = ({instruction}) => {
     const styles = useStyles();
 
     return (
         <div className={styles.item}>
-            <Image className={styles.image} src={imagePath}/>
-            <p>{text}</p>
+            <Image className={styles.image} src={instruction.imagePath} alt={instruction.alt}/>
+            <p>{instruction.text}</p>
         </div>
     );
 }

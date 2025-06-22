@@ -35,7 +35,7 @@ const AccountAvatar: React.FC<AccountAvatarProps> = ({logout}) => {
                 <>
                     <Popover positioning={"below-end"}>
                         <PopoverTrigger disableButtonEnhancement>
-                            <Button appearance="subtle" size="small"><Avatar color="colorful" name={accountName} size={40}/></Button>
+                            <Button appearance="subtle" size="small"><Avatar color="colorful" name={accountName} size={40} aria-label={"Icono de usuario de la cuenta " + accountName}/></Button>
                         </PopoverTrigger>
 
                         <PopoverSurface tabIndex={-1} className={styles.popoverSurface}>
@@ -44,7 +44,7 @@ const AccountAvatar: React.FC<AccountAvatarProps> = ({logout}) => {
                     </Popover>
                 </>
                 :
-                <Avatar color="anchor" icon={<AddFriendIcon/>} size={40}/>
+                <Avatar color="anchor" icon={<AddFriendIcon/>} size={40} aria-label={"Icono de cuenta sin iniciar sesión"}/>
             }
         </>
     );

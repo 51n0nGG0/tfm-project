@@ -28,7 +28,7 @@ const InstructionsCardBody: React.FC<InstructionsCardBodyProps> = ({ instruction
         <div className={styles.body}>
             {
                 instructions.map((instruction) => 
-                    <InstructionItem imagePath={instruction.imagePath} text={instruction.text}/>)
+                    <InstructionItem instruction={instruction}/>)
             }
         </div>
     );

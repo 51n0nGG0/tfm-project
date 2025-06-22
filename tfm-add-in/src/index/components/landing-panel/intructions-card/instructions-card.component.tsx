@@ -13,15 +13,18 @@ import { tokens } from "@fluentui/tokens";
 const instructions:Instruction[] = [
     {
         imagePath:"assets/icon-microsoft/icon-microsoft-80.png",
-        text:"1. Se solicita autorización para leer correos personales"
+        text:"1. Se solicita autorización para leer correos personales",
+        alt:"Icono de Microsoft 365 en color negro."
     },
     {
         imagePath:"assets/icon-ai/icon-ai-80.png",
-        text:"2. Se analiza el correo con la ayuda de un LLM"
+        text:"2. Se analiza el correo con la ayuda de un LLM",
+        alt:"Icono de procesador en color negro con las letras IA en el centro."
     },
     {
         imagePath:"assets/icon-file/icon-file-80.png",
-        text:"3. Se recibe un reporte detallado del correo"
+        text:"3. Se recibe un reporte detallado del correo",
+        alt:"Icono de archivo representando un informe en color negro"
     }
 ]
 

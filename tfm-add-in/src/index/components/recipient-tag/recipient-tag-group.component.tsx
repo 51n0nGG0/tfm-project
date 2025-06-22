@@ -42,8 +42,10 @@ const RecipientsTagGroup:React.FC<RecipientsTagGroupProps> = ({recipients}) => {
         media: (
             <Avatar
                 aria-hidden="true"
+                aria-label={recipient.emailAddress.name}
                 name={recipient.emailAddress.name}
                 color="colorful"
+                tabIndex={-1}
             />
         ),
         secondaryText: recipient.emailAddress.address,
@@ -54,11 +56,11 @@ const RecipientsTagGroup:React.FC<RecipientsTagGroupProps> = ({recipients}) => {
     return(
         <div className={styles.container}>
             <Overflow minimumVisible={1} padding={60}>
-                <TagGroup className={styles.tagGroup}>
+                <TagGroup className={styles.tagGroup} role={"list"} aria-label="Lista de usuarios destinatarios del correo">
                     {
                         items?.map(({ value, ...rest })=>
                             <OverflowItem key={value} id={value!}>
-                                <InteractionTag key={value}>
+                                <InteractionTag key={value} role="listitem" tabIndex={-1}>
                                     <InteractionTagPrimary {...rest}/>
                                 </InteractionTag>
                             </OverflowItem>

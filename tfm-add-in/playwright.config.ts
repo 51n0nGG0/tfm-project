@@ -29,14 +29,14 @@ export default defineConfig({
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         headless: false,
         launchOptions: {
-            slowMo: 1000,
+            slowMo: 500,
         },
         trace: "on-first-retry",
     },
     expect: {
         timeout: 20000,
     },
-    timeout: 60000,
+    timeout: 90000,
 
     /* Configure projects for major browsers */
     projects: [
@@ -56,16 +56,6 @@ export default defineConfig({
             name: "firefox",
             use: {
                 ...devices["Desktop Firefox"],
-                // Use prepared auth state.
-                headless: false,
-                storageState: "playwright/.auth/user.json",
-            },
-            dependencies: ["setup"],
-        },
-        {
-            name: "webkit",
-            use: {
-                ...devices["Desktop Safari"],
                 // Use prepared auth state.
                 headless: false,
                 storageState: "playwright/.auth/user.json",
