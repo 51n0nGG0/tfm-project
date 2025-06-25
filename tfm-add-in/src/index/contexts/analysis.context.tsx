@@ -27,7 +27,9 @@ export const AnalysisProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     const launchAnalysis = async (messageId: string) => {
         if (!socketRef.current) {
-            socketRef.current = io(websocketUrl);
+            socketRef.current = io(websocketUrl,{
+                path: "/socket.io",
+            });
         }
 
         socketRef.current.on("analysis_on_course", (payload) => {
