@@ -29,6 +29,7 @@ export const AnalysisProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         if (!socketRef.current) {
             socketRef.current = io(websocketUrl,{
                 path: "/socket.io",
+                transports: ["websocket"]
             });
         }
 
