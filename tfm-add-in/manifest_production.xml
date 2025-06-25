@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" xsi:type="MailApp">
-  <Id>62c1ef6c-8eca-41d6-8158-27c64c280bc7</Id>
+  <Id>ce37a1f2-f4f5-4674-b302-db082e188119</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>Contoso</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="TFM Add-in Development"/>
-  <Description DefaultValue="Mail analyzer development build"/>
-  <IconUrl DefaultValue="https://localhost:3000/assets/icon-64.png"/>
-  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-128.png"/>
-  <SupportUrl DefaultValue="https://www.contoso.com/help"/>
+  <DisplayName DefaultValue="TFM Add-in Production"/>
+  <Description DefaultValue="Mail analyzer production build"/>
+  <IconUrl DefaultValue="https://tfmaddin.dptoinformatica.uniovi.es/assets/icon-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://tfmaddin.dptoinformatica.uniovi.es/assets/icon-128.png"/>
+  <SupportUrl DefaultValue="https://tfmaddin.dptoinformatica.uniovi.es/help"/>
   <AppDomains>
-    <AppDomain>https://www.contoso.com</AppDomain>
-    <AppDomain>https://localhost:3000</AppDomain>
+    <AppDomain>https://tfmaddin.dptoinformatica.uniovi.es</AppDomain>
     <AppDomain>https://login.microsoftonline.com</AppDomain>
   </AppDomains>
   <Hosts>
@@ -25,7 +24,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://localhost:3000/index.html"/>
+        <SourceLocation DefaultValue="https://tfmaddin.dptoinformatica.uniovi.es/index.html"/>
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -72,12 +71,12 @@
       </Hosts>
       <Resources>
         <bt:Images>
-          <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
-          <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
-          <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+          <bt:Image id="Icon.16x16" DefaultValue="https://tfmaddin.dptoinformatica.uniovi.es/assets/icon-16.png"/>
+          <bt:Image id="Icon.32x32" DefaultValue="https://tfmaddin.dptoinformatica.uniovi.es/assets/icon-32.png"/>
+          <bt:Image id="Icon.80x80" DefaultValue="https://tfmaddin.dptoinformatica.uniovi.es/assets/icon-80.png"/>
         </bt:Images>
         <bt:Urls>
-          <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/index.html"/>
+          <bt:Url id="Taskpane.Url" DefaultValue="https://tfmaddin.dptoinformatica.uniovi.es/index.html"/>
         </bt:Urls>
         <bt:ShortStrings>
           <bt:String id="GroupLabel" DefaultValue="TFM Add-in"/>

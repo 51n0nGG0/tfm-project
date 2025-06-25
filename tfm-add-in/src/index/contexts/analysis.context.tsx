@@ -4,8 +4,8 @@ import { getMessage } from "../services/microsoft-api.service";
 import { useAuth } from "./auth.context";
 import { Report } from "../types/report";
 
-const WEBSOCKET_URL = "http://localhost:5001";
-const API_URL = "http://localhost:5000/analyze";
+const websocketUrl = process.env.WEBSOCKET_URL ?? "";
+const apiUrl = process.env.API_URL ?? "";
 
 interface AnalysisContextType {
     launchAnalysis: (messageId: string) => void;
@@ -27,7 +27,7 @@ export const AnalysisProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     const launchAnalysis = async (messageId: string) => {
         if (!socketRef.current) {
-            socketRef.current = io(WEBSOCKET_URL);
+            socketRef.current = io(websocketUrl);
         }
 
         socketRef.current.on("analysis_on_course", (payload) => {
@@ -53,7 +53,7 @@ export const AnalysisProvider: React.FC<{ children: React.ReactNode }> = ({ chil
             const message = await getMessage(messageId, accessToken);
 
             try {
-                const res = await fetch(API_URL, {
+                const res = await fetch(apiUrl, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
